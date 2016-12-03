@@ -1,0 +1,230 @@
+\documentclass{book}
+\usepackage[english]{babel} 
+\usepackage[utf8x]{inputenc} 
+\usepackage[T1]{fontenc} 
+\usepackage{fancyhdr} 
+\usepackage[a4paper,top=2cm,bottom=2cm,left=3cm,right=2cm,marginparwidth=1cm]{geometry} 
+\usepackage{xcolor}  
+\usepackage{amsmath} 
+\usepackage{graphicx} 
+\usepackage[colorinlistoftodos]{todonotes} 
+\usepackage[colorlinks=true, allcolors=blue]{hyperref} 
+\usepackage{setspace} 
+\setcounter{chapter}{4}
+\setcounter{section}{4}
+\setlength{\headheight}{14pt}
+\newcounter{pro1}
+\setcounter{pro1}{30}
+\newcommand{\pro}{\par\addtocounter{pro1}{1}
+\textbf{Problem \arabic{chapter}.\arabic{pro1} }\quad}
+\setcounter{equation}{20}
+\definecolor{light-gray}{rgb}{0.8,0.8,0.8}
+
+\begin{document}
+\pagestyle{fancy} 
+
+ 
+\renewcommand{\headrulewidth}{0pt}
+\fancyhf{} 
+
+\fancyhead[RO]{\large \textsl {\textbf{65}}} 
+\fancyhead[LO]{\large \textsl{4.2 Arithmetic and geometric means}} 
+
+\noindent\Large \textrm{Fortunately, a surprising trigonometric identity due to John Machin (1686–1751)}
+
+\begin {equation}\label{formula4.21}
+\arctan1=4\arctan\frac{1}{5}-\arctan\frac{1}{239}
+ \end{equation}
+\\
+\Large \textrm{accelerates the convergence by reducing x:}
+
+\begin {equation}\label{formula4.22}
+\frac{\pi}{4}=4\times\underbrace{(1-\frac{1}{3\times 5^{3}}+\dots)}_{\arctan(1/5)}-\underbrace{(1-\frac{1}{3\times 239^{3}}+\dots)}_{\arctan(1/239)}\cdot
+\end{equation}
+\\
+\noindent \Large \textrm{ Even with the speedup, $10^{9}$-digit accuracy requires calculating roughly $10^{9}$ terms.}\\
+\\
+\noindent\Large \textrm{ In contrast, the modern Brent–Salamin algorithm [3, 41], which relies onarithmetic and geometric means, converges to $\pi$ extremely rapidly. The
+algorithm is closely related to amazingly accurate methods for calculating
+the perimeter of an ellipse (Problem 4.15) and also for calculating mutual
+inductance [23]. The algorithm generates several sequences by starting
+with $a_{0}$ = 1 and $g_{0}$ = 1/√2; it then computes successive arithmetic means
+an, geometric means $g_{n}$, and their squared differences $d_{n}$.}
+
+
+\begin {equation}\label{formula4.23}
+a_{n+1}=\frac{a_{n}+g_{n}}{2}{,}\;\;\;\;g_{n+1}=\sqrt{a_{n}g_{n}}{,}\;\;\;\;d_{n}=a_n^2-g_n^2\cdot
+\end{equation}
+\\
+\noindent\Large \textrm{The a and g sequences rapidly converge to a number M($a_{0}$, $g_{0}$) called the arithmetic–geometric mean of $a_{0}$ and $g_{0}$. Then M($a_{0}$, $g_{0}$) and the difference sequence d determine $\pi$.}
+\begin {equation}\label{formula4.24}
+\pi=\frac{4M(a_{0},g_{0})^{2}}{1-\sum_{j=1}^\infty 2^{j+1}d_{i}}\cdot
+\end{equation}
+\\
+\noindent\Large \textrm{ The d sequence approaches zero quadratically; in other words, $d_{n+1}\sim d_n^2$ (Problem 4.16). Therefore, each iteration in this computation of $\pi$ doubles the digits of accuracy. A billion-digit calculation of $\pi$ requires only about
+30 iterations—far fewer than the $10^{10^{9}}$ terms using the arctangent series
+with x=1 or even than the $10^{9}$ terms using Machin’s speedup.} \\
+\\
+\colorbox{light-gray}{
+\begin{minipage}{\textwidth}
+\Large \textrm{\textbf{Problem 4.15 \;  Perimeter of an ellipse}\\
+To compute the perimeter of an ellipse with semimajor axis $a_{0}$ and semiminor
+axis $g_{0}$, compute the a, g, and d sequences and the common limit M($a_{0}$, $g_{0}$) of
+the a and g sequences, as for the computation of $\pi$. Then the perimeter P can
+be computed with the following formula:}\\
+\end{minipage}}
+\newpage
+\pagestyle{fancy} 
+
+\renewcommand{\headrulewidth}{0pt} 
+\fancyhf{}
+
+\fancyhead[LE]{\large \textsl {\textbf{66}}} 
+\fancyhead[RE]{\large \textsl{4 Pictorial proofs}}
+\colorbox{light-gray}{
+\begin{minipage}{\textwidth}
+\begin {equation}\label{formula4.25}
+P=\frac{A}{M(a_{b0},g_{0})}\left(a_0^2-B\sum_{j=0}^\infty 2^{j}d_{j}\right){,}
+\end{equation}
+\large\textrm{where A and B are constants for you to determine. Use the method of easy cases
+(Chapter 2) to determine their values. (See [3] to check your values and for a
+proof of the completed formula.)}\\
+\\
+\Large \textrm{\textbf{Problem 4.16 \;  Quadratic convergence}\\
+Start with $a_{0}$ = 1 and $g_{0}$ = 1/$\sqrt{2}$ (or any other positive pair) and follow severaliterations of the AM–GM sequence}\\
+\\
+\begin {equation}\label{formula4.26}
+a_{n+1}=\left(\frac{a_{n}+g_{n}}{2}\right)\;\;and\;\;a_{n+1}=\sqrt{a_{n}g_{n}}_\cdot
+\end{equation}
+\\
+\large\textrm{Then generate $d_{n}=a_n^2-g_n^2$  and  $\log_{10}{d_{n}}$ to check that $d_{n+1}\sim d_n^2$ (quadratic convergence).}\\
+\\
+\Large \textrm{\textbf{Problem 4.17 \;  Rapidity of convergence}\\
+Pick a positive $x_{0}$; then generate a sequence by the iteration}\\
+\\
+\begin {equation}\label{formula4.27}
+x_{n+1}=\frac{1}{2}\left(x_{n}+\frac{2}{x_{n}}\right)\;\;(n\geq0)\cdot
+\end{equation}
+\\
+\large\textrm{To what and how rapidly does the sequence converge? What if $x_{0}<0$}\\
+\end{minipage}}\\
+\\
+\Large \textrm{\textbf{4.3 \; Approximating the logarithm}\\
+A function is often approximated by its Taylor series}\\
+\begin {equation}\label{formula4.28}
+f(x)=f(0)+\left. \ x\frac{\text{d}f}{\text{d}x}\right|_{x=0}+\frac{x^{2}}{2}\left.\frac{\ d^{2}f}{\text{d}x^{2}}\right|_{x=0}+\dots{,}
+\end{equation}
+\large\textrm{which looks like an unintuitive sequence of symbols.
+Fortunately, pictures often explain the first and most
+important terms in a function approximation. For example, the one-term
+approximation $\sin\theta\approx\theta$, which replaces the altitude of the triangle by
+the arc of the circle, turns the nonlinear pendulum differential equation
+into a tractable, linear equation (Section 3.5).}\\
+\\
+\large\textrm{Another Taylor-series illustration of the value of pictures come from the
+series for the logarithm function:}\\
+\\
+\begin {equation}\label{formula4.29}
+\ln{1+x}=x-\frac{x^{2}}{2}+\frac{x^{3}}{3}-\dots\cdot
+\end{equation}
+\newpage
+\fancyhf{} 
+
+\fancyhead[RO]{\large \textsl {\textbf{67}}} 
+\fancyhead[LO]{\large \textsl{4.3 Approximating the logarithm}}
+
+\noindent\Large \textrm{Its first term, x, will lead to the wonderful approximation $(1+x)^{n}\approx e^{nx}$ for small x and arbitrary n (Section 5.3.4). Its second term, −$x^{2}$/2, helps
+evaluate the accuracy of that approximation. These first two terms are
+the most useful terms—and they have pictorial explanations.}\\
+\\
+\Large \textrm{The starting picture is the integral representation}\\
+\begin {equation}\label{formula4.30}
+\ln{(1+x)}=\int_{0}^{x}\frac{\text{d}t}{\text{1+t}}\cdot
+\end{equation}
+\large \textsl{What is the simplest approximation for the shaded area?}\\
+\\
+\Large \textrm{As a first approximation, the shaded area is roughly
+the circumscribed rectangle—an example of lumping.
+The rectangle has area x:}\\
+\begin {equation}\label{formula4.31}
+area=\underbrace{height}_{1}\times\underbrace{width}_{x}=x_\cdot
+\end{equation}
+\Large \textrm{This area reproduces the first term in the Taylor series. Because it uses a
+circumscribed rectangle, it slightly overestimates $\ln{(1+x)}$.}\\
+\\
+\Large \textrm{The area can also be approximated by drawing an inscribed
+rectangle. Its width is again x, but its height
+is not 1 but rather 1/(1+x), which is approximately
+1 − x (Problem 4.18). Thus the inscribed rectangle
+has the approximate area x(1 − x) = x − $x^{2}$. This
+area slightly underestimates $\ln{(1+x)}$.}\\
+\\
+\colorbox{light-gray}{
+\begin{minipage}{\textwidth}
+\Large \textrm{\textbf{Problem 4.18 \;  Picture for approximating the reciprocal function}\\
+Confirm the approximation}
+\begin {equation}\label{formula4.32}
+\frac{1}{(1+x)}\approx 1-x \;\; (for\;small\;x)
+\end{equation}
+by trying x = 0.1 or x = 0.2. Then draw a picture to illustrate the equivalent
+approximation (1 − x)(1 + x) $\approx $ 1.
+\end{minipage}}\\
+\\
+\Large \textrm{We now have two approximations to $\ln{(1+x)}$. The first and slightly
+simpler approximation came from drawing the circumscribed rectangle.
+The second approximation came from drawing the inscribed rectangle.
+Both dance around the exact value.}\\
+\\
+\large \textsl{How can the inscribed- and circumscribed-rectangle approximations be combined
+to make an improved approximation?}\\
+\\
+\newpage
+\fancyhf{}
+
+\fancyhead[LE]{\large \textsl {\textbf{68}}} 
+\fancyhead[RE]{\large \textsl{4 Pictorial proofs}}
+\noindent\Large \textrm{One approximation overestimates the area, and the
+other underestimates the area; their average ought
+to improve on either approximation. The average is
+a trapezoid with area}\\
+\begin {equation}\label{formula4.33}
+\frac{x+(x-x^{2})}{2}=x-\frac{x^{2}}{2}\cdot
+\end{equation}
+\Large \textrm{This area reproduces the first two terms of the full Taylor series}\\
+\begin {equation}\label{formula4.34}
+\ln{(1+x)}=\colorbox{light-gray}{$x-\frac{x^{2}}{2}$}+\frac{x^{3}}{3}-\cdots\cdot
+\end{equation}
+\colorbox{light-gray}{
+\begin{minipage}{\textwidth}
+\Large \textrm{\textbf{Problem 4.19 \;  Cubic term}\\
+Estimate the cubic term in the Taylor series by estimating the difference between
+the trapezoid and the true area.}
+\end{minipage}}\\
+\\
+\Large \textrm{For these logarithm approximations, the hardest problem is $\ln{2}$.}\\
+\begin {equation}\label{formula4.35}
+\ln{(1+1)}=\begin{cases}1\;\;\;\;\;\;\;\;(one\;term)\\1-\frac{1}{2}\;\;(two\;terms)\end{cases}
+\end{equation}
+\Large \textrm{Both approximations differ significantly from the true value (roughly
+0.693). Even moderate accuracy for $\ln{2}$ requires many terms of the Taylor
+series, far beyond what pictures explain (Problem 4.20). The problem is
+that x in $\ln{(1+x)}$ is 1, so the $x^{n}$ factor in each term of the Taylor series
+does not shrink the high-n terms.}\\
+\\
+\Large \textrm{The same problem happens when computing $\pi$ using Leibniz’s arctangent
+series (Section 4.2.3)}\\
+\begin {equation}\label{formula4.36}
+\arctan x=x-\frac{x^{3}}{3}+\frac{x^{5}}{5}-\frac{x^{7}}{7}\cdots\cdot
+\end{equation}
+\Large \textrm{By using $x = 1 $, the direct approximation of $\pi$/4 requires many terms
+to attain even moderate accuracy. Fortunately, the trigonometric identity
+$\arctan 1=4\arctan1/5-\arctan1/239$ lowers the largest x to 1/5 and
+thereby speeds the convergence.}\\
+\\
+\large \textsl{Is there an analogous that helps estimate $\ln{2}$ ?}\\
+\\
+\Large \textrm{Because 2 is also (4/3)/(2/3), an analogous rewriting of $\ln{2}$ is}\\
+\begin {equation}\label{formula4.37}
+\ln{2}=\ln{\frac{4}{3}}-\ln{\frac{2}{3}}\cdot
+\end{equation}
+\end{document}
