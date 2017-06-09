@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <math.h>
-float F(float x) {
+
+float F(float x) 
+{
 	float func;
 	func = x*x*x;
 	return func;
